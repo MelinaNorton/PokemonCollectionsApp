@@ -7,14 +7,14 @@ A fan-driven web application to search, collect, and manage your favorite Pokém
 ##  Tech Stack
 
 - **Frontend**  
-  - HTML5 & CSS3  
+  - HTML5 & CSS 
   - JavaScript & jQuery  
   - AJAX for dynamic API requests  
 - **Backend**  
-  - PHP 7.x+  
-  - MySQL (or MariaDB)  
+  - PHP  
+  - MySQL
 - **API**  
-  - [Pokémon API via RapidAPI](https://rapidapi.com/) (credited in-app)  
+  - (credited in-app)  
 - **Version Control**  
   - Git  
 
