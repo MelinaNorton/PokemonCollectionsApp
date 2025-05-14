@@ -4,7 +4,7 @@ A fan-driven web application to search, collect, and manage your favorite Pokém
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - **Frontend**  
   - HTML5 & CSS3  
@@ -20,7 +20,7 @@ A fan-driven web application to search, collect, and manage your favorite Pokém
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 1. **User Authentication**  
    - Secure login & session management in PHP  
