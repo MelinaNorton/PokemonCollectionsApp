@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Header with Jquery, the stylesheet, and the Ajax code linked-->
+  <head>
+    <title>Pokemon Collections App</title>
+    <script type="text/javascript" src="PokeAjaxRequest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="PokeApp.css">
+    <link rel="stylesheet" href="NavBar.css">
+   </head>
+   <body>
+    <div id="navbar">
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            fetch('../navbar.html')
+                  .then(response => response.text())
+                  .then(data => {
+                      document.getElementById('navbar').innerHTML = data;
+                  });
+          });
+      </script>
+      </div>
+<!--Div containing the navigation for the App/website "theme" (pokemon image, consistent-colored bar, etc)-->
+    <div class="intro">
+        <img style="width:30px; height:30px;" src="chickorita.png">
+        <p><strong>Pokemon Collections</strong></p>
+        <button class="collectionbtn">My Collection</button>
+        <button class="statsbtn">API Stats</button>
+        <button class="aboutbtn">About</button>
+        <button class="usabilitybtn">Usability Report</button>
+        <form action="dologout.php" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+        <p class="desc" style="font-style:italic"">Search for, collect, and learn more about your favorite pokemon from our extensive database!</p>
+        <p style="font-style: italic;">*To see an individual pokemon, double click the card!</p>
+    </br>
+<!-- search bar-->
+    <div id="searchbar">
+        <p><strong>Search for a Pokemon by:</strong>
+            <div class="dropdown">
+                <button class="typesearch">Select Search</button>
+                <div class="items">
+                    <button id="name">name</button>
+                    <button id="type">type</button>
+                    <button id="id">id</button>
+                </div>
+            </div>
+        <input type="text" size="40" id="pokesearch"></p>
+    </div>
+
+<!-- search results stored in this div-->
+     <div id="results">
+
+      <ul id="list">
+      </ul>
+
+     </div>
+     
+     <script type="text/javascript" src="PokeSearch.js"></script>
+   </body>
+</html>

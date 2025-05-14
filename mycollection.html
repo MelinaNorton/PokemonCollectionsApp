@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Header linking JQuery, the Ajax code needed to fetch/manipulate datasource, and the stylesheet-->
+  <head>
+    <title>My Pokemon Collection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="PokeAjaxRequest.js"></script>
+    <link rel="stylesheet" href="PokeApp.css">
+   </head>
+   <body>
+<!--Into div with website "theme", as well as navigation back to home-->
+    <div class="intro">
+        <img style="width:30px; height:30px;" src="chickorita.png">
+        <p>My Pokemon Collection</p>
+        <button class="home">Homepage</button>
+    </div>
+<!-- button to only display favorites-->
+    <button id="togglefavs">toggle favorites</button>
+<!-- button to restore the whole collection being visible-->
+    <button id="recollection">reload collection</button>
+<!--Div where the user's data will be displayed-->
+    <div id="collection">
+        <ul id="pokelist">
+
+        </ul>
+    </div>
+    <p class="desc" style="font-style: italic;"></p>
+<!--Script linking the card's click function to removePokemon() on document ready, as well as for fetching the whole collection/ handling a favorites-query-->
+    <script>
+        $(document).ready(function() {
+            getCollection();
+            $('#collection').on("click", ".ccard", function(e){
+                e.preventDefault();
+                console.log('card clicked!');
+                $elementId = $(this).attr("id");
+                removePokemon($elementId);
+                getCollection();
+            })
+            $('#collection').on("click", ".favbtn", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var $card = $(this).closest(".ccard");
+                var favStat = parseInt($card.attr("isFav"), 10) || 0;
+                
+                if (favStat === 1) {
+                    $card.attr("isFav", 0);
+                    $(this).css("background-color", "white");
+                } else {
+                    $card.attr("isFav", 1);
+                    $(this).css("background-color", "pink");
+                }
+                
+                $id = $card.attr("id");
+                flipFav($id);
+            });
+            $('#togglefavs').on("click", function(e) {
+                e.preventDefault();
+                $fav = 'yes';
+                getCollection($fav);
+            });
+            $('#recollection').on("click", function(e) {
+                e.preventDefault();
+                $fav = 'no';
+                getCollection($fav);
+            });
+        });
+    function getCollection($fav){
+        var $favquery = '';
+        if($fav == 'yes'){
+            $favquery = "favorites=true"
+        }
+        const settings = {
+            async : true,
+            crossDomain: true,
+            url: 'psearch.php?'+ $favquery,
+            method: 'GET',
+            dataType: 'json'
+        }
+        $.ajax(settings).done(function(response){
+            if(response){
+                var $div = $("#collection");
+                $("#pokelist").remove();
+                var $pokelist = $("<ul>", {id : "pokelist"});
+                console.log(response);
+                $.each(response, function(key, pokemon){
+                    var $li = $("<li>");
+                    var $card = $("<div>", {class:"ccard"});
+                    var $pName = $("<p>", {class: 'pname'}).text(pokemon.pokename);
+                    var $pType = $("<p>", {class : 'ptype'}).text(pokemon.poketype);
+                    var $pId = $("<p>", {class : 'pid'}).text(pokemon.pokedex_id);
+                    var $key = pokemon.id;
+                    var $isFav = pokemon.is_favorite;
+                    var $pImg = $("<img>", {src : pokemon.poke_img, class : "pimg"});
+                    var $isFavBtn = $("<button>", {style:"background-color:white;", class:"favbtn", type:"button"})
+                    var favStat = parseInt($isFav, 10) || 0;
+                    if(favStat == 1){
+                        $isFavBtn.css("background-color", "pink");
+                    }
+                    $li.append($pName, $pType, $pId, $pImg, $isFavBtn);
+                    $card.append($li);
+                    $card.attr('id', $key);
+                    $card.attr('isFav', $isFav);
+                    $pokelist.append($card);
+                });
+                $div.append($pokelist);
+            }
+            else{
+                console.log("no data retrieved!!");
+            }
+        });
+    }
+    </script>
+<!--Script necessary for button functionality linked before the body end tag-->
+    <script type="text/javascript" src="PokeSearch.js"></script>
+   </body>

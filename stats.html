@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Theader containing JQuery, the Ajax code, and the stylesheet-->
+  <head>
+    <title>API Stats Page</title>
+    <script type="text/javascript" src="PokeAjaxRequest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="PokeApp.css">
+   </head>
+   <body>
+<!--Intro with the website "theme" and navigation back to the homepage-->
+    <div class="intro">
+        <img style="width:30px; height:30px;" src="chickorita.png">
+        <p><strong>Statistics Page</strong></p>
+        <button class="home">Homepage</button>
+    </div>
+<!--Div for API call statistics/info-->
+     <h1>API Call Statistics</h1>
+     <p style="font-style: italic;">Here you can find the data and statistics on the API used with this App (built on the Pokemon Hub API)</p>
+     <div id="stats">
+        <br/>
+        <p>Pokemon Types: water, dark, flying, poison, fire, psychic, normal, bug, fairy, ground</p>
+        <p>ghost, electric, rock, steel, fairy, ice, and dragon</p></p>
+        <p>Pokemon Categories: Id, Type, and Name</p>
+        <p>Amount of Pokemon (per type): 20</p>
+        <br/>
+     </div>
+<!--necessary code for button functionality linked above the body end tag-->
+     <script type="text/javascript" src="PokeSearch.js"></script>
+   </body>
+</html>
